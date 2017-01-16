@@ -1,73 +1,68 @@
-var five = require("johnny-five"),
-    BeagleBone = require("beaglebone-io"),
-    mag;
+var five = require( "johnny-five" ),
+	Omega2 = require( "omega2-io" ),
+	mag;
 
+var board = new five.Board({io: new Omega2( )});
 
-var board = new five.Board({
-  io: new BeagleBone()
-});
+board.on( "ready", function( ) {
 
-board.on("ready", function() {
+	// Create a new `Magnetometer` hardware instance.
+	//
+	// five.Magnetometer();
+	//
+	// (Alias of:
+	//   new five.Compass({
+	//    device: "HMC5883L",
+	//    freq: 50,
+	//    gauss: 1.3
+	//   });
+	// )
+	//
 
-  // Create a new `Magnetometer` hardware instance.
-  //
-  // five.Magnetometer();
-  //
-  // (Alias of:
-  //   new five.Compass({
-  //    device: "HMC5883L",
-  //    freq: 50,
-  //    gauss: 1.3
-  //   });
-  // )
-  //
+	mag = new five.Magnetometer( );
 
-  mag = new five.Magnetometer();
+	// Properties
 
+	// mag.raw
+	//
+	// x, y, z
+	//
 
-  // Properties
+	// mag.scaled
+	//
+	// axis x, y, z
+	//
+	// based on value stored at (mag.scale)
+	//
 
-  // mag.raw
-  //
-  // x, y, z
-  //
+	// mag.heading
+	//
+	// Calculated heading in degrees (calibrated for magnetic north)
+	//
 
-  // mag.scaled
-  //
-  // axis x, y, z
-  //
-  // based on value stored at (mag.scale)
-  //
+	// mag.bearing
+	//
+	// Bearing data object
+	//
 
-  // mag.heading
-  //
-  // Calculated heading in degrees (calibrated for magnetic north)
-  //
+	// Magnetometer Event API
 
-  // mag.bearing
-  //
-  // Bearing data object
-  //
+	// "headingchange"
+	//
+	// Fires when the calculated heading has changed
+	//
+	mag.on( 'change', function( ) {
 
+		console.log('heading', Math.floor( this.heading ));
+		console.log( 'bearing', this.bearing );
 
-  // Magnetometer Event API
+	});
 
-  // "headingchange"
-  //
-  // Fires when the calculated heading has changed
-  //
-  mag.on("change", function() {
-
-    console.log("heading", Math.floor(this.heading));
-    console.log("bearing", this.bearing);
-
-  });
-
-  // "read"
-  //
-  // Fires continuously, every 66ms.
-  //
-  mag.on("read", function(err, timestamp) {
-    // console.log( "read", this.axis );
-  });
+	// "read"
+	//
+	// Fires continuously, every 66ms.
+	//
+	mag.on( 'read', function( err, timestamp ) {
+		// console.log( "read", this.axis );
+	});
 });

@@ -1,14 +1,14 @@
-var five = require("johnny-five"),
-    BeagleBone = require("beaglebone-io");
+var five = require( 'johnny-five' ),
+	Omega2 = require( 'omega2-io' );
 
-var board = new five.Board({
-  io: new BeagleBone()
-});
+var board = new five.Board({io: new Omega2( )});
 
-board.on("ready", function () {
-  var led = new five.Led();
+board.on( 'ready', function( ) {
+	var led = new five.Led( );
 
-  led.blink();
+	led.blink( );
 
-  this.repl.inject({ led: led });
+	this
+		.repl
+		.inject({ led: led });
 });

@@ -1,25 +1,21 @@
-# BeagleBone-IO
-BeagleBone Black IO Plugin for Johnny-Five
+# Omega2-IO
+Onion Omega2 IO Plugin for Johnny-Five
 
-Heavily based on [Galileo-IO](https://github.com/rwaldron/galileo-io) by [Rick Waldron](https://github.com/rwaldron)
+Heavily based on [BeagleBone-IO](https://github.com/julianduque/beaglebone-io) by [Julian Duque](https://github.com/julianduque)
 
 ## Install
 
 ```
-$ npm install beaglebone-io
+$ npm install omega2-io
 ```
 
-For the best user experience with BeagleBone-IO the recommended Operating
-System is [Debian](http://beagleboard.org/latest-images). Debian supports
-the runtime modification of the Device Tree which is a feature required
-by BeagleBone-IO. If a directory matching the pattern
-`/sys/devices/bone_capemgr.*` exists, the required support is available.
+This adapter is built for running on Onion Omega2 and Omega2+ development boards.
 
 ## Usage
 
 ``` js
-var BeagleBone = require('beaglebone-io');
-var board = new BeagleBone();
+var Omega2 = require('omega2-io');
+var board = new Omega2();
 
 board.on('ready', function () {
   this.digitalWrite(13, this.HIGH);
@@ -33,16 +29,16 @@ board.on('ready', function () {
 With Johnny-Five
 ``` js
 var five = require('johnny-five');
-var BeagleBone = require('beaglebone-io');
+var Omega2 = require('omega2-io');
 
-var board = new five.Board({ 
-  io: new BeagleBone()
+var board = new five.Board({
+  io: new Omega2()
 });
 
 board.on('ready', function () {
   var led = new five.Led();
   led.blink();
-  
+
   this.repl.inject({ led: led });
 });
 ```
@@ -83,7 +79,7 @@ For I2C:
 
 ## The MIT License (MIT)
 
-Copyright (c) Julian Duque, Alan Yorinks, Brian Cooke 2014
+Copyright (c) Patrick Gunderson 2017
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
