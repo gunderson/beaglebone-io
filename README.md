@@ -3,13 +3,21 @@ Onion Omega2 IO Plugin for Johnny-Five
 
 Heavily based on [BeagleBone-IO](https://github.com/julianduque/beaglebone-io) by [Julian Duque](https://github.com/julianduque)
 
+This [Johnny-Five](http://johnny-five.io) io adapter is built for running on Onion Omega2 and Omega2+ development boards.
+
 ## Install
 
+**Requisites**
+
 ```
-$ npm install omega2-io
+$ opkg update && opkg install nodejs npm
 ```
 
-This adapter is built for running on Onion Omega2 and Omega2+ development boards.
+**Node Packages**
+```
+$ npm install johnny-five omega2-io
+```
+
 
 ## Usage
 
